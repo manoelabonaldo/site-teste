@@ -7,7 +7,7 @@ from tchan import ChannelScraper
 
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
 TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
-app = Flask(_name_)
+app = Flask(__name__)
 
 
 def ultimas_promocoes():
@@ -20,26 +20,20 @@ def ultimas_promocoes():
     resultado.append(f"{message.created_at} {texto}")
     if contador == 10:
       return resultado
-
-   
+    
 menu = """
 <a href="/">Página inicial</a> | <a href="/promocoes">PROMOÇÕES</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
 <br>
 """
-
 @app.route("/")
 def index():
-  return menu + "Olá, mundo! Esse é meu site. (Manoela Bonaldo)"
-
+  return menu + "Olá, mundo! Esse é meu site. (Álvaro Justen)"
 @app.route("/sobre")
 def sobre():
   return menu + "Aqui vai o conteúdo da página Sobre"
-
 @app.route("/contato")
 def contato():
   return menu + "Aqui vai o conteúdo da página Contato"
-
-
 @app.route("/promocoes")
 def promocoes():
   conteudo = menu + """
@@ -50,8 +44,6 @@ def promocoes():
   for promocao in ultimas_promocoes():
     conteudo += f"<li>{promocao}</li>"
   return conteudo + "</ul>"
-
-
 @app.route("/promocoes2")
 def promocoes2():
   conteudo = menu + """
