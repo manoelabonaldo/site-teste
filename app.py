@@ -87,5 +87,5 @@ def dedoduro():
 
 @app.route("/dedoduro2")
 def dedoduro2():
-  sheet.append_row(["Álvaro", "Justen", "a partir do Flask"])
+  sheet.append_row(["Manoela", "Bonaldo", "a partir do Flask"])
   return "Planilha escrita!"
