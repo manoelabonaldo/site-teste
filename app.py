@@ -18,6 +18,7 @@ planilha = api.open_by_key("1ZDyxhXlCtCjMbyKvYmMt_8jAKN5JSoZ7x3MqlnoyzAM")
 sheet = planilha.worksheet("Sheet1")
 app = Flask(__name__)
 
+
 def ultimas_promocoes():
   scraper = ChannelScraper()
   contador = 0
@@ -28,20 +29,26 @@ def ultimas_promocoes():
     resultado.append(f"{message.created_at} {texto}")
     if contador == 10:
       return resultado
+
     
 menu = """
 <a href="/">Página inicial</a> | <a href="/promocoes">PROMOÇÕES</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
 <br>
 """
+
 @app.route("/")
 def index():
-  return menu + "Olá, mundo! Esse é meu site. (Manoela Bonaldo)"
+  return menu + "Olá, mundo! Esse é meu site. (Álvaro Justen)"
+
 @app.route("/sobre")
 def sobre():
   return menu + "Aqui vai o conteúdo da página Sobre"
+
 @app.route("/contato")
 def contato():
   return menu + "Aqui vai o conteúdo da página Contato"
+
+
 @app.route("/promocoes")
 def promocoes():
   conteudo = menu + """
@@ -52,6 +59,8 @@ def promocoes():
   for promocao in ultimas_promocoes():
     conteudo += f"<li>{promocao}</li>"
   return conteudo + "</ul>"
+
+
 @app.route("/promocoes2")
 def promocoes2():
   conteudo = menu + """
@@ -72,11 +81,11 @@ def promocoes2():
 @app.route("/dedoduro")
 def dedoduro():
   mensagem = {"chat_id": TELEGRAM_ADMIN_ID, "text": "Alguém acessou a página dedo duro!"}
-  requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=mensagem)
-  return "Mensagem enviada."
+  resposta = requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=mensagem)
+  return f"Mensagem enviada. Resposta ({resposta.status_code}): {resposta.text}"
 
 
 @app.route("/dedoduro2")
 def dedoduro2():
-  sheet.append_row(["Manoela", "Bonaldo", "a partir do Flask"])
+  sheet.append_row(["Álvaro", "Justen", "a partir do Flask"])
   return "Planilha escrita!"
