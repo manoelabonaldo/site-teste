@@ -4,3 +4,6 @@ tchan
 requests
 gspread
 oauth2client
+pandas 
+datetime
+
