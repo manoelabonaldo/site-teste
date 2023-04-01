@@ -2,6 +2,7 @@ import os
 
 import gspread
 import requests
+import altair
 from flask import Flask, request
 from oauth2client.service_account import ServiceAccountCredentials
 from tchan import ChannelScraper
@@ -20,18 +21,53 @@ sheet = planilha.worksheet("Página1")
 
 app = Flask(__name__)
 
+#_________________________[análise dos dados]_________________________
 
-def ultimas_promocoes():
-  scraper = ChannelScraper()
-  contador = 0
-  resultado = []
-  for message in scraper.messages("promocoeseachadinhos"):
-    contador += 1
-    texto = message.text.strip().splitlines()[0]
-    resultado.append(f"{message.created_at} {texto}")
-    if contador == 10:
-      return resultado
-  
+#acessar a página do Ministério do Trabalho e analisar a Lista Suja, disponibilizada em .xls
+lista_suja = 'https://www.gov.br/trabalho-e-previdencia/pt-br/composicao/orgaos-especificos/secretaria-de-trabalho/inspecao/areas-de-atuacao/cadastro_de_empregadores-atualizacao-extraord-09-mar-2023.xlsx' #'https://www.gov.br/trabalho-e-previdencia/pt-br/composicao/orgaos-especificos/secretaria-de-trabalho/inspecao/areas-de-atuacao/cadastro_de_empregadores-atualizacao-extraord-16-fev-2023.xlsx'
+df = pd.read_excel(lista_suja, skiprows=5)
+df
+
+#excluir colunas vazias
+df.drop(df.iloc[:, 10:96], inplace=True, axis=1)
+df
+
+#excluir linhas as quais não contém dados
+df2=df.dropna()
+df2
+
+Soma_Trabalhadores = df2['Trabalhadores envolvidos'].sum()
+print(Soma_Trabalhadores)
+
+Trabalhadores_UF = df2.groupby('UF')['Trabalhadores envolvidos'].sum().sort_values(ascending=False)
+Trabalhadores_UF
+
+Trabalhadores_UF = Trabalhadores_UF.reset_index()
+Trabalhadores_UF
+
+a = df2['CNAE'].value_counts()
+print(a)
+
+a=a.reset_index()
+
+a.info()
+
+repeticoesCNAE = df2.pivot_table(index = ['CNAE'], aggfunc ='size')
+
+Ranking_CNAE = repeticoesCNAE.sort_values(ascending=False)
+
+Ranking_CNAE = Ranking_CNAE.reset_index()
+Ranking_CNAE
+
+Ranking_CNAE['CNAE'] = Ranking_CNAE['CNAE'].astype(str)
+
+CNAES = {'0134-2/00': 'Cultivo de Café','0151-2/01': 'Criação de bovinos', '0210-1/08' : 'Produção de Carvão Vegetal', '9700-5/00' : 'Trabalho doméstico' }
+
+b = Ranking_CNAE.replace(CNAES)
+
+#_________________________[fim da análise dos dados]_________________________
+
+
 menu = """
 <a href="/">Página inicial</a> | <a href="/arquivo_listasuja">Arquivo da Lista Suja</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
 <br>
@@ -53,23 +89,25 @@ def contato():
 def contato():
   return menu + "Aqui vai o conteúdo de arquivo da lista suja"
 
-
 @app.route("/dedoduro")
 def dedoduro():
   mensagem = {"chat_id": TELEGRAM_ADMIN_ID, "text": "Alguém acessou a página dedo duro!"}
   resposta = requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data=mensagem)
   return f"Mensagem enviada. Resposta ({resposta.status_code}): {resposta.text}"
 
-
 @app.route("/dedoduro2")
 def dedoduro2():
   sheet.append_row(["Manoela", "Bonaldo", "a partir do Flask"])
   return "Planilha escrita!"
 
-
 @app.route("/telegram-bot", methods=["POST"])
 def telegram_bot():
   update = request.json
+   requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
+  return "ok"
+
+#_________________________[mensagens que o bot envia]_________________________
+
     if message == "oi":
     texto_resposta = f"Olá. 🤖\n\nSou o robô do combate ao trabalho escravo.\n\nO que você deseja saber?\n\nDigite 1️⃣ para descobrir o número total de trabalhadores que constam na lista suja do trabalho escravo.\nDigite 2️⃣ para saber em quais atividades econômicas o trabalho análogo à escravidão é mais frequente.\nDigite 3️⃣ para descobrir qual foi o estado em que mais pessoas foram resgatadas.\nDigite 4️⃣ para denunciar casos de trabalho análogo à escravidão.\nDigite 5️⃣ para maiores informações sobre trabalho escravo e outras dúvidas. \n\n📊🔍Os dados analisados aqui são fornecidos pelo Ministério do Trabalho e Previdência do Brasil por meio do Cadastro de Empregadores que tenham submetido trabalhadores a condições análogas à de escravo (Lista Suja do Trabalho Escravo)."
   elif message == "1":
@@ -86,6 +124,7 @@ def telegram_bot():
   else:
     texto_resposta = f"Olá. 🤖\n\nSou o robô do combate ao trabalho escravo.\n\nO que você deseja saber?\n\nDigite 1️⃣ para descobrir o número total de trabalhadores que constam na lista suja do trabalho escravo.\nDigite 2️⃣ para saber em quais atividades econômicas o trabalho análogo à escravidão é mais frequente.\nDigite 3️⃣ para descobrir qual foi o estado em que mais pessoas foram resgatadas.\nDigite 4️⃣ para denunciar casos de trabalho análogo à escravidão.\nDigite 5️⃣ para maiores informações sobre trabalho escravo e outras dúvidas. \n\n📊🔍Os dados analisados aqui são fornecidos pelo Ministério do Trabalho e Previdência do Brasil por meio do Cadastro de Empregadores que tenham submetido trabalhadores a condições análogas à de escravo (Lista Suja do Trabalho Escravo)."
   
-  requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
-  return "ok"
+  #_________________________[fim das mensagens que o bot envia]_________________________
+  
+
 
