@@ -110,7 +110,7 @@ def telegram_bot():
 
 #_________________________[mensagens que o bot envia]_________________________
 
-    if message == "oi":
+  if message == "oi":
     texto_resposta = f"Olá. 🤖\n\nSou o robô do combate ao trabalho escravo.\n\nO que você deseja saber?\n\nDigite 1️⃣ para descobrir o número total de trabalhadores que constam na lista suja do trabalho escravo.\nDigite 2️⃣ para saber em quais atividades econômicas o trabalho análogo à escravidão é mais frequente.\nDigite 3️⃣ para descobrir qual foi o estado em que mais pessoas foram resgatadas.\nDigite 4️⃣ para denunciar casos de trabalho análogo à escravidão.\nDigite 5️⃣ para maiores informações sobre trabalho escravo e outras dúvidas. \n\n📊🔍Os dados analisados aqui são fornecidos pelo Ministério do Trabalho e Previdência do Brasil por meio do Cadastro de Empregadores que tenham submetido trabalhadores a condições análogas à de escravo (Lista Suja do Trabalho Escravo)."
   elif message == "1":
     texto_resposta = f"Infelizmente o trabalho análogo ao de escravo ainda é uma realidade no Brasil.\n\nNa lista suja mais atual, {int(Soma_Trabalhadores)} trabalhadores foram resgatados em condições análogas à escravidão."
