@@ -31,8 +31,7 @@ def ultimas_promocoes():
     resultado.append(f"{message.created_at} {texto}")
     if contador == 10:
       return resultado
-
-    
+  
 menu = """
 <a href="/">Página inicial</a> | <a href="/arquivo_listasuja">Arquivo da Lista Suja</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
 <br>
@@ -50,14 +49,10 @@ def sobre():
 def contato():
   return menu + "Aqui vai o conteúdo da página Contato"
 
+@app.route("/arquivo-lista-suja")
+def contato():
+  return menu + "Aqui vai o conteúdo de arquivo da lista suja"
 
-@app.route("/arquivo_listasuja")
-def arquivo_listasuja():
-  conteudo = menu + """
-  Encontrei as seguintes promoções no <a href="https://t.me/promocoeseachadinhos">@promocoeseachadinhos</a>:
-  <br>
-  <ul>
-  """
 
 @app.route("/dedoduro")
 def dedoduro():
