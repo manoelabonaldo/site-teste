@@ -102,8 +102,10 @@ def dedoduro2():
 
 @app.route("/telegram-bot", methods=["POST"])
 def telegram_bot():
+  
   update = request.json
-   requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
+  resposta = requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
+    
   return "ok"
 
 #_________________________[mensagens que o bot envia]_________________________
