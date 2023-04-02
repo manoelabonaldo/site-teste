@@ -111,12 +111,13 @@ def telegram_bot():
  
   
  #__________________________________[bot]_____________________________________
-
   update = request.json
   update_id = update["update_id"]
 
   # Extrai dados para mostrar mensagem recebida
   first_name = update["message"]["from"]["first_name"]
+  last_name = update['message']['from']['last_name']
+  user_name = update['message']['from']['username']
   sender_id = update["message"]["from"]["id"]
   if "text" not in update["message"]:
     continue
