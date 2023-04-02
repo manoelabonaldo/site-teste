@@ -110,7 +110,7 @@ def dedoduro2():
   
  #__________________________________[bot]_____________________________________
  
-  @app.route("/telegram-bot", methods=["POST"])
+@app.route("/telegram-bot", methods=["POST"])
 def telegram_bot():
   mensagens = []
 
