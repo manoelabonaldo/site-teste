@@ -110,25 +110,30 @@ def dedoduro2():
   
  #__________________________________[bot]_____________________________________
  
-@app.route("/telegram-bot", methods=["POST"])
+@app.route("/telegram-bot", methods=['GET', 'POST'])
 def telegram_bot():
   mensagens = []
 
-  update = request.json 
+  update = request.json
+  
+  if request.method == 'POST':
+     update = request.get_json()
     
   update_id = update['update_id']
   first_name = update['message']['from']['first_name']
   last_name = update['message']['from']['last_name']
   user_name = update['message']['from']['username']
   sender_id = update['message']['from']['id']
-  chat_id = update['message']['chat']['id']
   date = datetime.fromtimestamp(update['message']['date']).date()
   time = datetime.fromtimestamp(update['message']['date']).time()
+  chat_id = update['message']['chat']['id']
   
-  if 'text' not in update['message']:
-    message = 'não entendi.'
-  else:
-    message = update['message']['text']
+  try:
+      texto = update['message']['text']
+  except KeyError:
+      print("received unhandled message type")
+      texto=''
+  return chat_id, texto
   
   if "username" in update["message"]["from"]:
     username = f' @{update["message"]["from"]["username"]}'
