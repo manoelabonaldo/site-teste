@@ -130,10 +130,10 @@ def telegram_bot():
   else:
     message = update['message']['text'].lower().strip()
   
-  if "username" in update['message']['from']:
-    username = f"@{update['message']['from']['username']}"
+  if "username" in update["message"]["from"]:
+    username = f' @{update["message"]["from"]["username"]}'
   else:
-    username = f'@ indisponível'
+    username = ""
 
   
   if message == "oi":
