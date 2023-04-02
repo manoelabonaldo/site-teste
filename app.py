@@ -73,7 +73,7 @@ b = Ranking_CNAE.replace(CNAES)
 
 
 menu = """
-<a href="/">Página inicial</a> | <a href="/arquivo_listasuja">Arquivo da Lista Suja</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
+<a href="/">Página inicial</a> | <a href="/arquivolistasuja">Arquivo da Lista Suja</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
 <br>
 """
 
@@ -109,6 +109,10 @@ def telegram_bot():
   
   update = request.json
   resposta = requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
+  
+  
+  nova_mensagem = {"chat_id": chat_id_resposta, "text": nova_resposta, "parse_mode" : 'HTML'}
+  requests.post(f"https://api.telegram.org./bot{token}/sendMessage", data=nova_mensagem)
     
   return "ok"
 
