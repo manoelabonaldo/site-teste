@@ -27,6 +27,9 @@ app = Flask(__name__)
 
 #_________________________[análise dos dados]_________________________
 
+@app.route('/dadoslistasuja', methods=['POST'])
+def dadoslistasuja():
+  
 #acessar a página do Ministério do Trabalho e analisar a Lista Suja, disponibilizada em .xls
 lista_suja = 'https://www.gov.br/trabalho-e-previdencia/pt-br/composicao/orgaos-especificos/secretaria-de-trabalho/inspecao/areas-de-atuacao/cadastro_de_empregadores-atualizacao-extraord-09-mar-2023.xlsx' 
 df = pd.read_excel(lista_suja, skiprows=5)
@@ -68,6 +71,7 @@ Ranking_CNAE['CNAE'] = Ranking_CNAE['CNAE'].astype(str)
 CNAES = {'0134-2/00': 'Cultivo de Café','0151-2/01': 'Criação de bovinos', '0210-1/08' : 'Produção de Carvão Vegetal', '9700-5/00' : 'Trabalho doméstico' }
 
 b = Ranking_CNAE.replace(CNAES)
+
 
 #_________________________[fim da análise dos dados]_________________________
 
