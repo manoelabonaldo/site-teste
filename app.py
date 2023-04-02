@@ -89,8 +89,8 @@ def sobre():
 def contato():
   return menu + "Aqui vai o conteúdo da página Contato"
 
-@app.route("/arquivo-lista-suja")
-def contato():
+@app.route("/arquivolistasuja")
+def arquivolistasuja():
   return menu + "Aqui vai o conteúdo de arquivo da lista suja"
 
 @app.route("/dedoduro")
