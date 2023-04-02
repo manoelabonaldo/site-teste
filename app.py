@@ -71,6 +71,7 @@ b = Ranking_CNAE.replace(CNAES)
 
 #_________________________[fim da análise dos dados]_________________________
 
+#__________________________________[site]____________________________________ 
 
 menu = """
 <a href="/">Página inicial</a> | <a href="/arquivolistasuja">Arquivo da Lista Suja</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
@@ -106,22 +107,14 @@ def dedoduro2():
 
 @app.route("/telegram-bot", methods=["POST"])
 def telegram_bot():
-  
+ #______________________________[fim do site]_________________________________ 
+ 
   
  #__________________________________[bot]_____________________________________
 
   update = request.json
-  
-  update_id = int(sheet.get("A1")[0][0])
-
-#parâmetros de uma URL - também são chamados de query strings
-resposta = requests.get(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/getUpdates?offset={update_id + 1}")
-dados = resposta.json()["result"]  # lista de dicionários (cada dict é um "update")
-print(f"Temos {len(dados)} novas atualizações:")
-mensagens = []
-for update in dados:
   update_id = update["update_id"]
- 
+
   # Extrai dados para mostrar mensagem recebida
   first_name = update["message"]["from"]["first_name"]
   sender_id = update["message"]["from"]["id"]
@@ -135,8 +128,6 @@ for update in dados:
   else:
     username = ""
   print(f"[{datahora}] Nova mensagem de {first_name} @{username} ({chat_id}): {message}")
-  
-
  
   nova_mensagem = {"chat_id": chat_id, "text": texto_resposta, "parse_mode": 'html'}
   resposta = requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data = nova_mensagem)
@@ -161,5 +152,6 @@ for update in dados:
   
   #_________________________[fim das mensagens que o bot envia]_________________________
   
+  #___________________________________[fim do bot]______________________________________
 
 
