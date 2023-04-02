@@ -107,9 +107,37 @@ def dedoduro2():
 @app.route("/telegram-bot", methods=["POST"])
 def telegram_bot():
   
+  
+ #__________________________________[bot]_____________________________________
+
   update = request.json
   
+  update_id = int(sheet.get("A1")[0][0])
+
+#parâmetros de uma URL - também são chamados de query strings
+resposta = requests.get(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/getUpdates?offset={update_id + 1}")
+dados = resposta.json()["result"]  # lista de dicionários (cada dict é um "update")
+print(f"Temos {len(dados)} novas atualizações:")
+mensagens = []
+for update in dados:
+  update_id = update["update_id"]
+ 
+  # Extrai dados para mostrar mensagem recebida
+  first_name = update["message"]["from"]["first_name"]
+  sender_id = update["message"]["from"]["id"]
+  if "text" not in update["message"]:
+    continue
+  message = update["message"]["text"]
+  chat_id = update["message"]["chat"]["id"]
+  datahora = str(datetime.datetime.fromtimestamp(update["message"]["date"]))
+  if "username" in update["message"]["from"]:
+    username = f' @{update["message"]["from"]["username"]}'
+  else:
+    username = ""
+  print(f"[{datahora}] Nova mensagem de {first_name} @{username} ({chat_id}): {message}")
   
+
+ 
   nova_mensagem = {"chat_id": chat_id, "text": texto_resposta, "parse_mode": 'html'}
   resposta = requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data = nova_mensagem)
 
