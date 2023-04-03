@@ -30,47 +30,47 @@ app = Flask(__name__)
 @app.route('/dadoslistasuja', methods=['POST'])
 def dadoslistasuja():
   
-#acessar a página do Ministério do Trabalho e analisar a Lista Suja, disponibilizada em .xls
-lista_suja = 'https://www.gov.br/trabalho-e-previdencia/pt-br/composicao/orgaos-especificos/secretaria-de-trabalho/inspecao/areas-de-atuacao/cadastro_de_empregadores-atualizacao-extraord-09-mar-2023.xlsx' 
-df = pd.read_excel(lista_suja, skiprows=5)
-df
+  #acessar a página do Ministério do Trabalho e analisar a Lista Suja, disponibilizada em .xls
+  lista_suja = 'https://www.gov.br/trabalho-e-previdencia/pt-br/composicao/orgaos-especificos/secretaria-de-trabalho/inspecao/areas-de-atuacao/cadastro_de_empregadores-atualizacao-extraord-09-mar-2023.xlsx' 
+  df = pd.read_excel(lista_suja, skiprows=5)
+  df
 
-#excluir colunas vazias
-df.drop(df.iloc[:, 10:96], inplace=True, axis=1)
-df
+  #excluir colunas vazias
+  df.drop(df.iloc[:, 10:96], inplace=True, axis=1)
+  df
 
-#excluir linhas as quais não contém dados
-df2=df.dropna()
-df2
+  #excluir linhas as quais não contém dados
+  df2=df.dropna()
+  df2
 
-Soma_Trabalhadores = df2['Trabalhadores envolvidos'].sum()
-print(Soma_Trabalhadores)
+  Soma_Trabalhadores = df2['Trabalhadores envolvidos'].sum()
+  print(Soma_Trabalhadores)
 
-Trabalhadores_UF = df2.groupby('UF')['Trabalhadores envolvidos'].sum().sort_values(ascending=False)
-Trabalhadores_UF
+  Trabalhadores_UF = df2.groupby('UF')['Trabalhadores envolvidos'].sum().sort_values(ascending=False)
+  Trabalhadores_UF
 
-Trabalhadores_UF = Trabalhadores_UF.reset_index()
-Trabalhadores_UF
+  Trabalhadores_UF = Trabalhadores_UF.reset_index()
+  Trabalhadores_UF
 
-a = df2['CNAE'].value_counts()
-print(a)
+  a = df2['CNAE'].value_counts()
+  print(a)
 
-a=a.reset_index()
+  a=a.reset_index()
 
-a.info()
+  a.info()
 
-repeticoesCNAE = df2.pivot_table(index = ['CNAE'], aggfunc ='size')
+  repeticoesCNAE = df2.pivot_table(index = ['CNAE'], aggfunc ='size')
 
-Ranking_CNAE = repeticoesCNAE.sort_values(ascending=False)
+  Ranking_CNAE = repeticoesCNAE.sort_values(ascending=False)
 
-Ranking_CNAE = Ranking_CNAE.reset_index()
-Ranking_CNAE
+  Ranking_CNAE = Ranking_CNAE.reset_index()
+  Ranking_CNAE
 
-Ranking_CNAE['CNAE'] = Ranking_CNAE['CNAE'].astype(str)
+  Ranking_CNAE['CNAE'] = Ranking_CNAE['CNAE'].astype(str)
 
-CNAES = {'0134-2/00': 'Cultivo de Café','0151-2/01': 'Criação de bovinos', '0210-1/08' : 'Produção de Carvão Vegetal', '9700-5/00' : 'Trabalho doméstico' }
+  CNAES = {'0134-2/00': 'Cultivo de Café','0151-2/01': 'Criação de bovinos', '0210-1/08' : 'Produção de Carvão Vegetal', '9700-5/00' : 'Trabalho doméstico' }
 
-b = Ranking_CNAE.replace(CNAES)
+  b = Ranking_CNAE.replace(CNAES)
 
 
 #_________________________[fim da análise dos dados]_________________________
@@ -114,7 +114,7 @@ def dedoduro2():
   
  #__________________________________[bot]_____________________________________
  
-@app.route("/telegram-bot", methods=['GET', 'POST'])
+@app.route("/telegram-bot", methods=['POST'])
 def telegram_bot():
   mensagens = []
 
@@ -133,11 +133,11 @@ def telegram_bot():
   chat_id = update['message']['chat']['id']
   
   try:
-      texto = update['message']['text']
+      message = update['message']['text']
   except KeyError:
       print("received unhandled message type")
-      texto=''
-  return chat_id, texto
+      message=''
+  #return chat_id, texto
   
   if "username" in update["message"]["from"]:
     username = f' @{update["message"]["from"]["username"]}'
