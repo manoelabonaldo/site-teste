@@ -4,8 +4,6 @@ import altair as alt
 import pandas as pd
 
 def lendotabelas(): 
-
-#acessar a página do Ministério do Trabalho e analisar a Lista Suja, disponibilizada em .xls
   lista_suja = 'https://www.gov.br/trabalho-e-previdencia/pt-br/composicao/orgaos-especificos/secretaria-de-trabalho/inspecao/areas-de-atuacao/cadastro_de_empregadores-atualizacao-extraord-09-mar-2023.xlsx' 
   df = pd.read_excel(lista_suja, skiprows=5)
   df
