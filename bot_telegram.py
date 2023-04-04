@@ -3,7 +3,6 @@ import os
 import gspread
 import json
 import requests
-import openai
 
 from datetime import datetime, timedelta
 from oauth2client.service_account import ServiceAccountCredentials
