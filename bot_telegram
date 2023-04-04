@@ -16,8 +16,6 @@ api = gspread.authorize(conta)
 planilha = api.open_by_key("1NuMnkxDYzf4CtKPzV1jbKDmwWbM5W7Bld3EqgM9IoHs")
 sheet = planilha.worksheet("Página1")
 
-app = Flask(__name__)
-
   if request.method == 'POST':
      update = request.get_json()
     
