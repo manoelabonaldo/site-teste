@@ -1,7 +1,8 @@
+import os
+
 import gspread
 import json
 import requests
-import os
 import openai
 
 from datetime import datetime, timedelta
