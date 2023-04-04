@@ -18,7 +18,8 @@ sheet = planilha.worksheet("Página1")
 
 app = Flask(__name__)
 
- update = request.get_json()
+  if request.method == 'POST':
+     update = request.get_json()
     
   update_id = update['update_id']
   first_name = update['message']['from']['first_name']
