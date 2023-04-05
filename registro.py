@@ -15,16 +15,16 @@ TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
 
 def registronaplanilha():
 
-with open("credenciais.json", mode="w") as arquivo:
-  arquivo.write(GOOGLE_SHEETS_CREDENTIALS)
-conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
-api = gspread.authorize(conta)
-planilha = api.open_by_key("1NuMnkxDYzf4CtKPzV1jbKDmwWbM5W7Bld3EqgM9IoHs")
-sheet = planilha.worksheet("Página1")
+  with open("credenciais.json", mode="w") as arquivo:
+    arquivo.write(GOOGLE_SHEETS_CREDENTIALS)
+  conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
+  api = gspread.authorize(conta)
+  planilha = api.open_by_key("1NuMnkxDYzf4CtKPzV1jbKDmwWbM5W7Bld3EqgM9IoHs")
+  sheet = planilha.worksheet("Página1")
 
-# Atualiza planilha do sheets com último update processado
-sheet.append_rows(mensagens)
-#sheet.update("A1", username)
-sheet.update("A1", update_id)
+  # Atualiza planilha do sheets com último update processado
+  sheet.append_rows(mensagens)
+  #sheet.update("A1", username)
+  sheet.update("A1", update_id)
   
-return "Ok"
+  return "Ok"
