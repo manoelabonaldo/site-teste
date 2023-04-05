@@ -12,7 +12,7 @@ from tchan import ChannelScraper
 from datetime import datetime
 
 import analise_dados 
-from bot_telegram import bot_dotelegram
+import bot_telegram
 from registro import registronaplanilha
 
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
