@@ -27,7 +27,7 @@ response = requests.get(url)
 soup = BeautifulSoup(response.content, "html.parser")
 
 # Analisar o conteúdo HTML com BeautifulSoup e encontrar todos os links
-soup = BeautifulSoup(html, 'html.parser')
+soup = BeautifulSoup(response.content, 'html.parser')
 links = soup.find_all('a')
 
 xlsx_links = []
