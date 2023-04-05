@@ -41,3 +41,7 @@ if xlsx_links:
         print(link)
 else:
     print("Não foi encontrado nenhum arquivo .xlsx files contendo a expressão 'cadastro_de_empregadores'.")
+    
+lista_sujaatual = link
+sheet.append_row([lista_sujaatual])
+
