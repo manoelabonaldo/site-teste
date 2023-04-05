@@ -9,11 +9,8 @@ TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
 TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
 
 
-
-
-if request.method == 'POST':
-   update = request.get_json()
-    
+def bot_dotelegram(): 
+   
   update_id = update['update_id']
   first_name = update['message']['from']['first_name']
   last_name = update['message']['from']['last_name']
@@ -33,9 +30,11 @@ if request.method == 'POST':
   if "username" in update["message"]["from"]:
     username = f' @{update["message"]["from"]["username"]}'
   else:
-    username = ""
+    username = 
+      
+  if request.method == 'POST':
+  update = request.get_json()
 
-  
   if message == "oi":
      texto_resposta = f"Olá. 🤖\n\nSou a Antonieta, uma robô que analisa e registra a lista suja do trabalho escravo.\n\nO que você deseja saber em relação à lista suja mais atual?\n\nDigite 1️⃣ para descobrir o número total de trabalhadores que constam na lista suja do trabalho escravo.\nDigite 2️⃣ para saber em quais atividades econômicas o trabalho análogo à escravidão é mais frequente.\nDigite 3️⃣ para descobrir qual foi o estado em que mais pessoas foram resgatadas.\nDigite 4️⃣ para denunciar casos de trabalho análogo à escravidão.\nDigite 5️⃣ para maiores informações sobre trabalho escravo e outras dúvidas. \n\n📊🔍Os dados analisados aqui são fornecidos pelo Ministério do Trabalho e Previdência do Brasil por meio do Cadastro de Empregadores que tenham submetido trabalhadores a condições análogas à de escravo (Lista Suja do Trabalho Escravo)."
   elif message == "1":
@@ -53,3 +52,4 @@ if request.method == 'POST':
 
   nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
   resposta = requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data = nova_mensagem)
+  Return "Ok"
