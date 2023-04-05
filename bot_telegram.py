@@ -1,11 +1,8 @@
 import os 
 
-import gspread
 import json
 import requests
 
-from datetime import datetime, timedelta
-from oauth2client.service_account import ServiceAccountCredentials
 
 GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
