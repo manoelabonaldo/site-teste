@@ -3,7 +3,10 @@ import pandas as pd
 import altair as alt
 import json
 import requests
+import gspread
+import openpyxl
 
+from oauth2client.service_account import ServiceAccountCredentials
 from analise_dados import analisa_listasuja
 
 GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
