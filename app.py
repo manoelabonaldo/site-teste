@@ -57,6 +57,7 @@ def dedoduro2():
 @app.route("/telegram-bot", methods=['POST'])
   mensagens = []
   update = request.json
+  
   if request.method == 'POST':
      update = request.get_json()
   chat_id = update['message']['chat']['id']
