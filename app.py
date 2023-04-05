@@ -11,7 +11,6 @@ from oauth2client.service_account import ServiceAccountCredentials
 from tchan import ChannelScraper
 from datetime import datetime
 
-import analise_dados 
 import bot_telegram
 from registro import registronaplanilha
 
