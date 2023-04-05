@@ -16,7 +16,7 @@ TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
 def registronaplanilha():
 
 with open("credenciais.json", mode="w") as arquivo:
-arquivo.write(GOOGLE_SHEETS_CREDENTIALS)
+  arquivo.write(GOOGLE_SHEETS_CREDENTIALS)
 conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
 api = gspread.authorize(conta)
 planilha = api.open_by_key("1NuMnkxDYzf4CtKPzV1jbKDmwWbM5W7Bld3EqgM9IoHs")
