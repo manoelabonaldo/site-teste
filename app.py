@@ -55,7 +55,6 @@ def dedoduro2():
   return "Planilha escrita!"
 
 @app.route("/telegram-bot", methods=['POST'])
-def telegram_bot():
   mensagens = []
   update = request.json
   if request.method == 'POST':
