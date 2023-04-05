@@ -8,6 +8,7 @@ import openpyxl
 
 from oauth2client.service_account import ServiceAccountCredentials
 from analise_dados import analisa_listasuja
+from datetime import datetime
 
 GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
