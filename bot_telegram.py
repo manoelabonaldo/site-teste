@@ -3,6 +3,7 @@ import os
 import json
 import requests
 
+from analise_dados import analisa_listasuja
 
 GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
