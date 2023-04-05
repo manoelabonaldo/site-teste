@@ -58,6 +58,6 @@ def dedoduro2():
 def telegram_bot():
   mensagens = []
   update = request.json
+  if request.method == 'POST':
+     update = request.get_json()
   return "ok"
-
- 
