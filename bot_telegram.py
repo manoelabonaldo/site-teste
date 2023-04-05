@@ -30,7 +30,7 @@ def bot_dotelegram():
   if "username" in update["message"]["from"]:
     username = f' @{update["message"]["from"]["username"]}'
   else:
-    username = 
+    username = ""
       
   if request.method == 'POST':
   update = request.get_json()
