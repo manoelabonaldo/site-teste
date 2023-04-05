@@ -52,4 +52,3 @@ def bot_dotelegram():
 
   nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
   resposta = requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data = nova_mensagem)
-  Return "Ok"
