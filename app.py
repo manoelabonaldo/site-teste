@@ -60,4 +60,7 @@ def telegram_bot():
   update = request.json
   if request.method == 'POST':
      update = request.get_json()
+  nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
+  resposta = requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data = nova_mensagem)
+  
   return "ok"
