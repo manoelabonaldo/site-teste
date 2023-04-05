@@ -37,7 +37,7 @@ def bot_dotelegram(update):
 
 
    Soma_Trabalhadores = df2['Trabalhadores envolvidos'].sum()
-   print(Soma_Trabalhadores)
+   
 
    Trabalhadores_UF = df2.groupby('UF')['Trabalhadores envolvidos'].sum().sort_values(ascending=False)
 
@@ -46,11 +46,11 @@ def bot_dotelegram(update):
 
 
    a = df2['CNAE'].value_counts()
-   print(a)
+
 
    a=a.reset_index()
 
-   a.info()
+
 
    repeticoesCNAE = df2.pivot_table(index = ['CNAE'], aggfunc ='size')
 
