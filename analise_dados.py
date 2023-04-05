@@ -46,4 +46,3 @@ CNAES = {'0134-2/00': 'Cultivo de Café','0151-2/01': 'Criação de bovinos', '0
 
 b = Ranking_CNAE.replace(CNAES)
 
-Return "Ok"
