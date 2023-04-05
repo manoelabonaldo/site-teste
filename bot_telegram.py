@@ -87,7 +87,7 @@ def bot_dotelegram(update):
       message = update['username']
    except KeyError:
       print("received unhandled username")
-      user_name=''
+      username=''
 #return chat_id, texto
 
 
