@@ -55,13 +55,9 @@ def dedoduro2():
   return "Planilha escrita!"
 
 @app.route("/telegram-bot", methods=['POST'])
-  mensagens = []
-  update = request.json
   
-  if request.method == 'POST':
-     update = request.get_json()
-  chat_id = update['message']['chat']['id']
-  nova_mensagem = {"chat_id": chat_id, "text": texto_resposta}
-  resposta = requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data = nova_mensagem)
+  def telegram_bot():
+  update = request.json
+  bot_telegram.bot_dotelegram(update)
   
   return "ok"
