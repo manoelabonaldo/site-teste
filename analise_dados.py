@@ -34,6 +34,7 @@ a.info()
 
 repeticoesCNAE = df2.pivot_table(index = ['CNAE'], aggfunc ='size')
 
+
 Ranking_CNAE = repeticoesCNAE.sort_values(ascending=False)
 
 Ranking_CNAE = Ranking_CNAE.reset_index()
@@ -44,3 +45,5 @@ Ranking_CNAE['CNAE'] = Ranking_CNAE['CNAE'].astype(str)
 CNAES = {'0134-2/00': 'Cultivo de Café','0151-2/01': 'Criação de bovinos', '0210-1/08' : 'Produção de Carvão Vegetal', '9700-5/00' : 'Trabalho doméstico' }
 
 b = Ranking_CNAE.replace(CNAES)
+
+Return "Ok"
