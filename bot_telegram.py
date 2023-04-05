@@ -9,7 +9,7 @@ TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
 TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
 
 
-def bot_dotelegram(): 
+def bot_dotelegram(update): 
    
   update_id = update['update_id']
   first_name = update['message']['from']['first_name']
