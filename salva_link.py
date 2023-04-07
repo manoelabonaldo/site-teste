@@ -13,15 +13,14 @@ from googleapiclient.errors import HttpError
 from bs4 import BeautifulSoup
 
 GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
-
+GOOGLE_SHEETS_KEY = os.environ["GOOGLE_SHEETS_KEY"]
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
 TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
-GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
 with open("credenciais.json", mode="w") as arquivo:
   arquivo.write(GOOGLE_SHEETS_CREDENTIALS)
 conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
 api = gspread.authorize(conta)
-planilha = api.open_by_key("1xR0Xy-m_UWpxofHRf66xX2O50keDnAlexIFdQTOBa2Q/edit#gid=0")
+planilha = api.open_by_key(f'{GOOGLE_SHEETS_KEY}')
 sheet = planilha.worksheet("Página1")
 
 
