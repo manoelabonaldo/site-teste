@@ -8,8 +8,6 @@ import bs4
 
 
 from oauth2client.service_account import ServiceAccountCredentials
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
 
 
 def puxa_listasuja(): 
