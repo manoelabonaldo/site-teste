@@ -4,6 +4,7 @@ import requests
 import datetime
 import pytz
 import os
+import bs4
 
 from oauth2client.service_account import ServiceAccountCredentials
 from googleapiclient.discovery import build
