@@ -44,6 +44,5 @@ def puxa_listasuja():
       print("Não foi encontrado nenhum arquivo .xlsx files contendo a expressão 'cadastro_de_empregadores'.")
     
   lista_sujaatual = link
-  timezone = 'America/Sao_Paulo'
   sheet.append_row([lista_sujaatual, date])
   print('Informações adicionadas com sucesso.')
