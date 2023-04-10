@@ -45,21 +45,8 @@ def puxa_listasuja():
     
   lista_sujaatual = link
 
-  range_name = 'A1:B1'
-
   timezone = 'America/Sao_Paulo'
   now = datetime.datetime.now(pytz.timezone(timezone)).strftime('%m/%d/%Y %H:%M:%S')
-  service = build('sheets', 'v4', credentials=conta)
-  values = [
-      [link, now]
-  ]
-  request = service.spreadsheets().values().append(
-      spreadsheetId=SPREADSHEET_ID,
-      range=range_name,
-      valueInputOption='USER_ENTERED',
-      insertDataOption='INSERT_ROWS',
-      body={'values': values}
-  )
-  response = request.execute()
+  sheet.append_row([lista_sujaatual, date])
   print('Informações adicionadas com sucesso.')
  
