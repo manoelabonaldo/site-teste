@@ -1,4 +1,3 @@
-import beautifulsoup4
 import gspread
 import oauth2client
 import requests
