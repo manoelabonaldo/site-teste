@@ -12,17 +12,17 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from bs4 import BeautifulSoup
 
-GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
-TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
-TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
-with open("credenciais.json", mode="w") as arquivo:
-  arquivo.write(GOOGLE_SHEETS_CREDENTIALS)
-conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
-api = gspread.authorize(conta)
-planilha = api.open_by_key("1xR0Xy-m_UWpxofHRf66xX2O50keDnAlexIFdQTOBa2Q")
-sheet = planilha.worksheet("Página1")
-
 def puxa_listasuja(): 
+
+  GOOGLE_SHEETS_CREDENTIALS = os.environ["GOOGLE_SHEETS_CREDENTIALS"]
+  TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
+  TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
+  with open("credenciais.json", mode="w") as arquivo:
+    arquivo.write(GOOGLE_SHEETS_CREDENTIALS)
+  conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
+  api = gspread.authorize(conta)
+  planilha = api.open_by_key("1xR0Xy-m_UWpxofHRf66xX2O50keDnAlexIFdQTOBa2Q")
+  sheet = planilha.worksheet("Página1")
 
   url = 'https://www.gov.br/trabalho-e-previdencia/pt-br/pt-br/composicao/orgaos-especificos/secretaria-de-trabalho/inspecao/areas-de-atuacao/combate-ao-trabalho-escravo-e-analogo-ao-de-escravo'
   response = requests.get(url)
