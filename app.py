@@ -12,6 +12,7 @@ from tchan import ChannelScraper
 from datetime import datetime
 
 import bot_telegram
+import salva_link
 
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
 TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
