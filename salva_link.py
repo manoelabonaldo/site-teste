@@ -5,7 +5,7 @@ import datetime
 import pytz
 import os
 import bs4
-import beautifulsoup4
+
 
 from oauth2client.service_account import ServiceAccountCredentials
 from googleapiclient.discovery import build
