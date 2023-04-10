@@ -3,7 +3,6 @@ import oauth2client
 import requests
 import datetime
 import pytz
-import gdown
 import os
 
 from oauth2client.service_account import ServiceAccountCredentials
