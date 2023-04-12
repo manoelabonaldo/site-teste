@@ -51,6 +51,6 @@ def telegram_bot():
   return "ok"
 
 @app.route("/salva-link")
-def analisa_dados():
+def repositorio_listasuja():
   salva_link.puxa_listasuja()
   return menu + "esse é o link de acesso ao repositório da lista suja do trabalho escravo: https://docs.google.com/spreadsheets/d/1xR0Xy-m_UWpxofHRf66xX2O50keDnAlexIFdQTOBa2Q/edit#gid=0"
