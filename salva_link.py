@@ -40,7 +40,7 @@ def puxa_listasuja():
       for link in xlsx_links:
           print(link)
           lista_sujaatual = link
-          sheet.append_row([lista_sujaatual, date])
+          sheet.append_row([lista_sujaatual, today])
           print('Informações adicionadas com sucesso.')
   else:
       print("Não foi encontrado nenhum arquivo .xlsx files contendo a expressão 'cadastro_de_empregadores'.")
