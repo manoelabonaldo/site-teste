@@ -23,7 +23,7 @@ def puxa_listasuja():
   planilha = api.open_by_key("1xR0Xy-m_UWpxofHRf66xX2O50keDnAlexIFdQTOBa2Q")
   sheet = planilha.worksheet("Página1")
   
-  today = datetime.datetime.now().strftime("%Y-%m-%d")
+  today = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
   url = 'https://www.gov.br/trabalho-e-previdencia/pt-br/pt-br/composicao/orgaos-especificos/secretaria-de-trabalho/inspecao/areas-de-atuacao/combate-ao-trabalho-escravo-e-analogo-ao-de-escravo'
   response = requests.get(url)
