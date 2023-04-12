@@ -4,7 +4,8 @@ import requests
 import datetime
 import pytz
 import os
-import bs4
+
+from bs4 import BeautifulSoup
 
 
 from oauth2client.service_account import ServiceAccountCredentials
@@ -21,6 +22,8 @@ def puxa_listasuja():
   api = gspread.authorize(conta)
   planilha = api.open_by_key("1xR0Xy-m_UWpxofHRf66xX2O50keDnAlexIFdQTOBa2Q")
   sheet = planilha.worksheet("Página1")
+  
+  today = datetime.datetime.now().strftime("%Y-%m-%d")
 
   url = 'https://www.gov.br/trabalho-e-previdencia/pt-br/pt-br/composicao/orgaos-especificos/secretaria-de-trabalho/inspecao/areas-de-atuacao/combate-ao-trabalho-escravo-e-analogo-ao-de-escravo'
   response = requests.get(url)
